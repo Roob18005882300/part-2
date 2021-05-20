@@ -1,22 +1,135 @@
 namespace SpriteKind {
     export const Item = SpriteKind.create()
     export const ShopSprite = SpriteKind.create()
+    export const ShopItem = SpriteKind.create()
 }
+scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile19`, function (sprite, location) {
+    ShopHL.setImage(img`
+        f f f f f f 
+        . f f f f . 
+        . . f f . . 
+        . . . . . . 
+        `)
+    ShopHL.setPosition(288, 75)
+    if (controller.A.isPressed()) {
+        Level = 1
+        tiles.setTilemap(tilemap`level2`)
+        PlayerGuy.setPosition(50, 200)
+    }
+})
 controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
     if (JC == 0) {
         PlayerGuy.vy = -250
         JC += 1
     }
 })
-scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile11`, function (sprite, location) {
+scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile32`, function (sprite, location) {
+    PlayerGuy.z = 1
+    Level = 0
+    tiles.setTilemap(tilemap`level1`)
+    PlayerGuy.setPosition(288, 78)
+})
+scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile4`, function (sprite, location) {
+    ShopHL.setImage(img`
+        . . . . . . 
+        . . . . . . 
+        . . . . . . 
+        . . . . . . 
+        `)
+})
+scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile37`, function (sprite, location) {
+    PlayerGuy.z = -2
+})
+scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile20`, function (sprite, location) {
+    ShopHL.setImage(img`
+        f f f f f f 
+        . f f f f . 
+        . . f f . . 
+        . . . . . . 
+        `)
+    ShopHL.setPosition(288, 75)
     if (controller.A.isPressed()) {
+        Level = 1
+        tiles.setTilemap(tilemap`level2`)
+        PlayerGuy.setPosition(50, 200)
+    }
+})
+function ShopFunc () {
+    UpgradeOption = sprites.create(img`
+        . . . . . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . . . . . 
+        . . . . . f f . . . . . . . . . . f . . 
+        . e e e e b b b b b b b b e e e . f . . 
+        . e e e e e e b b b b b b e e 2 2 b b . 
+        . e e . . . e e f . f f f . . 2 2 . . . 
+        . . . . . e e e . . f f f 2 2 2 2 2 2 . 
+        . . . . . e e . . . . f f 2 2 2 2 2 2 . 
+        . . . . . . . . . . . f f f . 2 2 . . . 
+        . . . . . . . . . . . . . . . 2 2 . . . 
+        `, SpriteKind.ShopItem)
+    WeaponOption = sprites.create(img`
+        . . . . . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . . . . . 
+        . . . . . f f . . . . . . . . . 7 f . . 
+        . e e e e b b b b b b b b e e 7 7 7 . . 
+        . e e e e e e b b b b b b e 7 7 7 7 7 . 
+        . e e . . . e e f . f f f 7 7 7 7 7 7 7 
+        . . . . . e e e . . f f f . . 7 7 7 . . 
+        . . . . . e e . . . . f f f . 7 7 7 . . 
+        . . . . . . . . . . . f f f . 7 7 7 . . 
+        . . . . . . . . . . . . . . . 7 7 7 . . 
+        `, SpriteKind.ShopItem)
+    Price = sprites.create(img`
+        ............................................................
+        ............................................................
+        ............................................................
+        ............................................................
+        ....1....1.11111.111111.11111...1111..11111..11111..1111....
+        ....1....1.1...1.1......1....1.1....1.1....1.1.....1........
+        ....1....1.1...1.1......1....1.1....1.1....1.1.....1........
+        ....1....1.1...1.1......1....1.1....1.1....1.1.....1........
+        ....1....1.11111.1..111.11111..111111.1....1.1111...111.....
+        ....1....1.1.....1....1.111....1....1.1....1.1.........1....
+        ....1....1.1.....1....1.1.11...1....1.1....1.1.........1....
+        ....111111.1.....111111.1..111.1....1.11111..11111.1111.....
+        ............................................................
+        ............................................................
+        ............................................................
+        ............................................................
+        ............................................................
+        ............................................................
+        ............................................................
+        ............................................................
+        ............................................................
+        ............................................................
+        ............................................................
+        ............................................................
+        ............................................................
+        ............................................................
+        ............................................................
+        ............................................................
+        ............................................................
+        ............................................................
+        `, SpriteKind.ShopItem)
+    UpgradeOption.setPosition(53, 26)
+    WeaponOption.setPosition(98, 26)
+    Price.setPosition(124, 87)
+    UpgradeOption.z = 3
+    WeaponOption.z = 3
+    Price.z = 3
+}
+scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile11`, function (sprite, location) {
+    ShopHL.setImage(img`
+        1 1 1 1 1 1 
+        . 1 1 1 1 . 
+        . . 1 1 . . 
+        . . . . . . 
+        `)
+    tiles.placeOnRandomTile(ShopHL, assets.tile`myTile25`)
+    if (controller.A.isPressed()) {
+        ShopVar = 1
+        ShopFunc()
         Shop.setImage(img`
-            dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
-            dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
-            dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
-            dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
-            dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
-            dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
             dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
             dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
             dddddddbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbbbbbbbbbddddddddddddddd
@@ -126,17 +239,24 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile11`, function (sprite, 
             dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
             dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
             dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
-            dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
-            dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
-            dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
-            dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+            ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddfffffdfddddfdfdfffffddddd11111111ddddddd
+            ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddfdddddffddffdfdddfdddddd1444444221dddddd
+            ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddfddddddfddfddfdddfdddddd1421112221dddddd
+            ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddfddddddfffdddfdddfdddddd14212212e1dddddd
+            ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddffffddddffdddfdddfdddddd14211122e1dddddd
+            ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddfdddddddffdddfdddfdddddd14212212e1dddddd
+            ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddfddddddfffdddfdddfdddddd12212212e1dddddd
+            ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddfddddddfdfdddfdddfdddddd12211122e1dddddd
+            ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddfddddddfdffddfdddfdddddd1eeeeeeee1dddddd
+            ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddfffffdffddfddfdddfddddddd11111111ddddddd
             dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
             `)
-        Shop.z = 100
+        Shop.z = 2
         controller.moveSprite(PlayerGuy, 0, 0)
         scene.centerCameraAt(Shop.x, Shop.y)
     }
     if (controller.B.isPressed()) {
+        ShopVar = 0
         Shop.setImage(img`
             ................................................................................................................................................................
             ................................................................................................................................................................
@@ -259,11 +379,74 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile11`, function (sprite, 
             ................................................................................................................................................................
             ................................................................................................................................................................
             `)
+        UpgradeOption.setImage(img`
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            `)
+        WeaponOption.setImage(img`
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            `)
+        Price.setImage(img`
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            `)
         controller.moveSprite(PlayerGuy, 85, 0)
         scene.cameraFollowSprite(PlayerGuy)
     }
+    if (controller.left.isPressed()) {
+    	
+    }
 })
+let ShopVar = 0
+let Price: Sprite = null
+let WeaponOption: Sprite = null
+let UpgradeOption: Sprite = null
 let JC = 0
+let Level = 0
+let ShopHL: Sprite = null
 let Shop: Sprite = null
 let PlayerGuy: Sprite = null
 PlayerGuy = sprites.create(img`
@@ -418,12 +601,12 @@ let Weapon = sprites.create(img`
     . . . . . . . . . . . . . . . . 
     . . . . . . . . . . . . . . . . 
     . . . . . . . . . . . . . . . . 
-    . . . . . b b b b b b b c . . . 
-    . . . . b b b b b b b b . . . . 
-    . . . . c c c f f . . . . . . . 
-    . . . . c c c . . . . . . . . . 
-    . . . c c c . . . . . . . . . . 
-    . . . c c c . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
     . . . . . . . . . . . . . . . . 
     . . . . . . . . . . . . . . . . 
     . . . . . . . . . . . . . . . . 
@@ -550,6 +733,13 @@ Shop = sprites.create(img`
     ................................................................................................................................................................
     ................................................................................................................................................................
     `, SpriteKind.ShopSprite)
+info.setScore(10)
+ShopHL = sprites.create(img`
+    . . . . . . 
+    . . . . . . 
+    . . . . . . 
+    . . . . . . 
+    `, SpriteKind.Player)
 forever(function () {
     if (JC == 1) {
         pause(500)
