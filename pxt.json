@@ -1,5 +1,5 @@
 {
-    "name": "Part 2",
+    "name": "GrinderGame",
     "description": "",
     "dependencies": {
         "device": "*",
