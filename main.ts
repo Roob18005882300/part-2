@@ -103,6 +103,17 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile32`, function (sprite, 
     tiles.setTilemap(tilemap`level1`)
     PlayerGuy.setPosition(288, 78)
 })
+controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
+    let WeaponUnlock1 = 0
+    if (WeaponUnlock1 == 1) {
+        if (0 == 0 && 0 == 0) {
+        	
+        }
+        if (0 == 0 && 0 == 0) {
+        	
+        }
+    }
+})
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile4`, function (sprite, location) {
     ShopHL.setImage(img`
         . . . . . . 
